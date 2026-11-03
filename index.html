@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daemon-018 // Gedela Hemanth — Cybersecurity & AI Developer</title>
+<meta name="description" content="Portfolio of Gedela Hemanth (Daemon-018) — cybersecurity researcher, ethical hacker, Termux developer, and AI systems builder.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0e14;
+  --bg2:#0f1520;
+  --card:#121a28;
+  --border:#1e2a3d;
+  --text:#d3dce6;
+  --muted:#7a8ba3;
+  --green:#00ff9d;
+  --green-dim:#00cc7e;
+  --cyan:#00d4ff;
+  --red:#ff4d6d;
+  --yellow:#ffd166;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Space Grotesk',system-ui,sans-serif;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+.mono{font-family:'JetBrains Mono',monospace}
+::selection{background:var(--green);color:#000}
+/* ambient grid + glow */
+body::before{
+  content:'';position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(ellipse 60% 40% at 70% -10%, rgba(0,255,157,.08), transparent),
+    radial-gradient(ellipse 50% 40% at 10% 110%, rgba(0,212,255,.06), transparent);
+}
+body::after{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(rgba(0,255,157,.03) 1px, transparent 1px),
+                   linear-gradient(90deg, rgba(0,255,157,.03) 1px, transparent 1px);
+  background-size:44px 44px;
+}
+.container{max-width:1080px;margin:0 auto;padding:0 24px}
+/* nav */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(10,14,20,.85);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+nav .container{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--green);text-decoration:none;font-size:15px}
+.logo span{color:var(--text)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-family:'JetBrains Mono',monospace;transition:color .2s}
+.nav-links a:hover{color:var(--green)}
+.menu-btn{display:none;background:none;border:1px solid var(--border);color:var(--green);padding:6px 12px;border-radius:6px;font-family:'JetBrains Mono',monospace;cursor:pointer}
+/* hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;padding:120px 0 60px}
+.hero .tag{
+  font-family:'JetBrains Mono',monospace;color:var(--green);font-size:13px;
+  border:1px solid rgba(0,255,157,.3);background:rgba(0,255,157,.06);
+  display:inline-block;padding:4px 12px;border-radius:99px;margin-bottom:20px;width:fit-content;
+}
+.hero h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:700;letter-spacing:-1px;line-height:1.1}
+.hero h1 .grad{background:linear-gradient(90deg,var(--green),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:clamp(.95rem,2vw,1.15rem);margin-top:18px}
+.hero .sub .cursor{display:inline-block;width:9px;background:var(--green);animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+.hero .cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;font-size:14px;
+  padding:12px 22px;border-radius:8px;text-decoration:none;transition:all .2s;border:1px solid;
+}
+.btn-primary{background:var(--green);color:#00140c;border-color:var(--green);font-weight:700}
+.btn-primary:hover{background:var(--green-dim);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,255,157,.25)}
+.btn-ghost{border-color:var(--border);color:var(--text)}
+.btn-ghost:hover{border-color:var(--green);color:var(--green);transform:translateY(-2px)}
+.hero .meta{margin-top:50px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted)}
+.hero .meta .line{display:flex;align-items:center;gap:10px;margin:6px 0}
+.hero .meta .prompt{color:var(--green)}
+/* sections */
+section{padding:90px 0}
+.section-head{display:flex;align-items:center;gap:14px;margin-bottom:44px}
+.section-head .num{font-family:'JetBrains Mono',monospace;color:var(--green);font-size:15px}
+.section-head h2{font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:700}
+.section-head .line{flex:1;height:1px;background:var(--border)}
+/* about */
+.about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:start}
+.about-text p{color:var(--muted);margin-bottom:16px;font-size:15.5px}
+.about-text strong{color:var(--text)}
+.about-text .hl{color:var(--green)}
+.panel{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;
+}
+.panel h3{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--green);letter-spacing:1px;margin-bottom:16px;text-transform:uppercase}
+.skill-list{list-style:none}
+.skill-list li{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px dashed var(--border);font-size:14px}
+.skill-list li:last-child{border-bottom:none}
+.skill-list .bar{width:42%;height:5px;background:var(--bg2);border-radius:3px;overflow:hidden;position:relative}
+.skill-list .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--cyan));border-radius:3px}
+.skill-list .lvl{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
+/* timeline */
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:'';position:absolute;left:8px;top:4px;bottom:4px;width:2px;background:linear-gradient(180deg,var(--green),var(--cyan),transparent)}
+.tl-item{position:relative;padding:0 0 30px 12px}
+.tl-item::before{
+  content:'';position:absolute;left:-24px;top:6px;width:12px;height:12px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--green);box-shadow:0 0 10px rgba(0,255,157,.5);
+}
+.tl-item .yr{font-family:'JetBrains Mono',monospace;color:var(--green);font-size:13px;letter-spacing:1px}
+.tl-item h4{font-size:16px;margin:4px 0 6px}
+.tl-item p{color:var(--muted);font-size:13.5px}
+/* projects */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+.card{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:24px;transition:all .25s;display:flex;flex-direction:column;position:relative;overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--green),var(--cyan));opacity:0;transition:opacity .25s;
+}
+.card:hover{transform:translateY(-4px);border-color:rgba(0,255,157,.4);box-shadow:0 12px 32px rgba(0,0,0,.4)}
+.card:hover::before{opacity:1}
+.card .proj-tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--cyan);margin-bottom:12px;letter-spacing:1px;text-transform:uppercase}
+.card h3{font-size:17px;margin-bottom:10px;font-weight:700}
+.card p{color:var(--muted);font-size:13.5px;margin-bottom:16px;flex:1}
+.card .langs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.card .langs span{
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text);
+  background:var(--bg2);border:1px solid var(--border);padding:2px 8px;border-radius:4px;
+}
+.card .links{display:flex;gap:14px}
+.card .links a{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--green);text-decoration:none}
+.card .links a:hover{text-decoration:underline}
+.card .links a.alt{color:var(--muted)}
+/* skills */
+.skill-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.skill-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px}
+.skill-card .icon{font-size:22px;margin-bottom:10px}
+.skill-card h4{font-size:15px;margin-bottom:8px;color:var(--text)}
+.skill-card p{font-size:13px;color:var(--muted)}
+/* blog */
+.blog-card{display:flex;gap:18px;align-items:flex-start;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;text-decoration:none;transition:all .25s;margin-bottom:14px}
+.blog-card:hover{border-color:rgba(0,255,157,.4);transform:translateX(4px)}
+.blog-card .date{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--green);white-space:nowrap;padding-top:3px}
+.blog-card h3{color:var(--text);font-size:15.5px;margin-bottom:4px}
+.blog-card p{color:var(--muted);font-size:13px}
+/* contact */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.contact-card{
+  display:flex;align-items:center;gap:14px;background:var(--card);
+  border:1px solid var(--border);border-radius:12px;padding:18px 20px;
+  color:var(--text);text-decoration:none;transition:all .25s;
+}
+.contact-card:hover{border-color:var(--green);transform:translateY(-3px)}
+.contact-card .ico{font-size:20px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:var(--bg2);border-radius:10px}
+.contact-card .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+.contact-card .val{font-size:14px;font-weight:500}
+/* footer */
+footer{border-top:1px solid var(--border);padding:34px 0;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted)}
+footer .heart{color:var(--red)}
+/* responsive */
+@media(max-width:760px){
+  .nav-links{display:none;position:absolute;top:60px;left:0;right:0;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--border);padding:16px 24px;gap:14px}
+  .nav-links.open{display:flex}
+  .menu-btn{display:block}
+  .about-grid{grid-template-columns:1fr}
+  section{padding:70px 0}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="#" class="logo">Daemon-018<span>@</span>~$</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">~/about</a></li>
+      <li><a href="#journey">~/journey</a></li>
+      <li><a href="#projects">~/projects</a></li>
+      <li><a href="#skills">~/skills</a></li>
+      <li><a href="#blog">~/blog</a></li>
+      <li><a href="#contact">~/contact</a></li>
+    </ul>
+    <button class="menu-btn" onclick="document.getElementById('navLinks').classList.toggle('open')">menu</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <span class="tag">// cybersecurity · ethical hacking · AI systems · defence tech</span>
+    <h1>I build secure things,<br><span class="grad">and break others.</span></h1>
+    <p class="sub"><span class="mono">$ whoami</span> → Gedela Hemanth <span class="mono">alias <span style="color:var(--green)">Daemon-018</span></span><span class="cursor">&nbsp;</span></p>
+    <p style="color:var(--muted);margin-top:12px;font-size:15px;max-width:640px">Termux developer · ethical hacker &amp; pentester (red + blue team) · AI systems builder · defence tech researcher. I run my entire attack lab from an Android phone — no proot, no excuses.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="#projects">▶ view projects</a>
+      <a class="btn btn-ghost" href="#contact">contact me</a>
+    </div>
+    <div class="meta">
+      <div class="line"><span class="prompt">root@daemon-018:~$</span> <span>whoami && uname -a</span></div>
+      <div class="line"><span class="prompt">➜</span> <span>Gedela Hemanth · JNTU-GV EEE R23 · Termux on Android</span></div>
+      <div class="line"><span class="prompt">➜</span> <span>red team → blue team → bug bounty → govt cyber (CERT-In / DRDO)</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">01.</span>
+      <h2>about me</h2>
+      <span class="line"></span>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm <strong class="hl">Gedela Hemanth</strong> — an <strong>Electrical &amp; Electronics Engineering</strong> student at <strong class="hl">JNTU-GV</strong> (R23, 3rd Year) and a self-taught <strong class="hl">cybersecurity researcher</strong>. My whole attack lab runs on an Android phone via Termux — 215+ apt packages, custom-built tools, no proot, no VM.</p>
+        <p>My security interests span the full spectrum: <strong class="hl">red teaming</strong> (offensive — pentesting, WiFi auditing, recon) and <strong class="hl">blue teaming</strong> (defensive — hardening, analysis, monitoring). I'm building toward CTF practice, bug bounty platforms (HackerOne / Bugcrowd), and government cybersecurity roles like <strong>CERT-In Scientist-B</strong> and DRDO.</p>
+        <p>On the build side, I create open-source tools that turn Android into a real dev + security workstation — from AI coding on Termux (<strong>Claude-termux</strong>) to WiFi audit toolkits (<strong>NetForge / DWK</strong>) to AI assistants (<strong>J.A.R.V.I.S. PWA</strong>). I also work on <strong class="hl">defence tech</strong> research: X-band radar signal absorbers for MSME submissions, currently at ₹350 prototype stage.</p>
+        <p>When I'm not breaking or building, I'm creating content — a <strong class="hl">cybersecurity series in Telugu + English (Tenglish)</strong> for YouTube/Shorts, turning complex attacks into 60-second lessons anyone can follow, and documenting everything on my blog.</p>
+      </div>
+      <div class="panel">
+        <h3>// current status</h3>
+        <ul class="skill-list">
+          <li><span>⚡ Active project</span><span class="lvl" style="color:var(--green)">Signal Absorber (X-band)</span></li>
+          <li><span>🎓 Studying</span><span class="lvl">JNTU-GV · EEE R23</span></li>
+          <li><span>🔐 Focus</span><span class="lvl">Red + blue team</span></li>
+          <li><span>💰 Goal</span><span class="lvl">Bug bounty</span></li>
+          <li><span>🏛️ Target</span><span class="lvl">CERT-In / DRDO</span></li>
+          <li><span>🎬 Creating</span><span class="lvl">Telugu cyber series</span></li>
+          <li><span>🤖 Building</span><span class="lvl">AI agents &amp; automation</span></li>
+          <li><span>📝 Blogging</span><span class="lvl">daemon-018.blogspot.com</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="journey" style="padding-top:0">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">02.</span>
+      <h2>my journey</h2>
+      <span class="line"></span>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="yr">2025</span>
+        <h4>Started the security grind</h4>
+        <p>Turned my Android phone into a dev + pentest workstation with Termux. Built the Claude-termux setup so AI coding runs natively — no proot, no chroot.</p>
+      </div>
+      <div class="tl-item">
+        <span class="yr">2026 · Early</span>
+        <h4>AI assistants &amp; WiFi toolkits</h4>
+        <p>Shipped J.A.R.V.I.S. PWA (ChatGPT-style assistant) and the DWK / NetForge WiFi audit &amp; purple-team toolkit (Kotlin) — full APK build, rebrand, and smali-level fixes.</p>
+      </div>
+      <div class="tl-item">
+        <span class="yr">2026 · Jul</span>
+        <h4>MSME Hackathon 6.0 submission</h4>
+        <p>Submitted Smart ID Card — child safety / POCSO prevention idea with SIM-telecom deployment angle. Ran MSME defence-tech analysis across 5 hackathon editions.</p>
+      </div>
+      <div class="tl-item">
+        <span class="yr">2026 · Jul</span>
+        <h4>Launched the blog</h4>
+        <p>Started daemon-018.blogspot.com — cybersecurity + AI content. First post: "Top 5 AI Security Threats in 2026".</p>
+      </div>
+      <div class="tl-item">
+        <span class="yr">2026 · Now</span>
+        <h4>Defence research &amp; content</h4>
+        <p>Working on X-band radar signal absorber (India-first MSME defence project). Building a Telugu cybersecurity video series. Preparing for CERT-In Scientist-B (GATE EC) + bug bounty path.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" style="padding-top:0">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">03.</span>
+      <h2>featured projects</h2>
+      <span class="line"></span>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="proj-tag">tooling · 2025</div>
+        <h3>Claude-termux</h3>
+        <p>Run Claude Code directly in Termux on Android — no proot, no chroot, no VM. Full native integration so AI coding works on a phone.</p>
+        <div class="langs"><span>Python</span><span>Termux</span><span>Shell</span></div>
+        <div class="links"><a href="https://github.com/Daemon-018/Claude-termux" target="_blank">repo ↗</a></div>
+      </div>
+      <div class="card">
+        <div class="proj-tag">ai · pwa</div>
+        <h3>J.A.R.V.I.S. PWA</h3>
+        <p>ChatGPT-style AI assistant as a progressive web app — conversational AI with a clean, J.A.R.V.I.S.-inspired interface.</p>
+        <div class="langs"><span>TypeScript</span><span>PWA</span><span>AI</span></div>
+        <div class="links"><a href="https://github.com/Daemon-018/jarvis-pwa" target="_blank">repo ↗</a></div>
+      </div>
+      <div class="card">
+        <div class="proj-tag">security · android</div>
+        <h3>NetForge / DWK</h3>
+        <p>WiFi audit &amp; purple-team toolkit for Android — network recon, dictionary + bruteforce attack engine, passlist generator, queue management. Rebuilt from WIBR+ at smali level.</p>
+        <div class="langs"><span>Kotlin</span><span>Android</span><span>Smali</span></div>
+        <div class="links"><a href="https://github.com/Daemon-018/DWK" target="_blank">repo ↗</a><span class="mono" style="color:var(--yellow);font-size:11px">private</span></div>
+      </div>
+      <div class="card">
+        <div class="proj-tag">defence · research</div>
+        <h3>Signal Absorber (X-band)</h3>
+        <p>Radar signal absorption research for defence applications — X-band (8–12 GHz) absorber design, targeting India-first military tech. Prototype budget ₹350.</p>
+        <div class="langs"><span>RF</span><span>Materials</span><span>MSME</span></div>
+        <div class="links"><a href="https://daemon-018.blogspot.com" target="_blank" class="alt">in progress</a></div>
+      </div>
+      <div class="card">
+        <div class="proj-tag">hackathon · social impact</div>
+        <h3>MSME Smart ID Card</h3>
+        <p>Child safety / POCSO prevention submission — Smart ID Card with SIM-telecom deployment angle, submitted to MSME Hackathon 6.0.</p>
+        <div class="langs"><span>IoT</span><span>Edge AI</span><span>LoRa</span></div>
+        <div class="links"><a href="https://daemon-018.blogspot.com" target="_blank" class="alt">submission</a></div>
+      </div>
+      <div class="card">
+        <div class="proj-tag">ai · education</div>
+        <h3>Study AI</h3>
+        <p>Persistent study companion — intent-detection AI chat, syllabus-aware learning, connected to WhatsApp. Built to power JNTU-GV R23 notes.</p>
+        <div class="langs"><span>Python</span><span>AI</span><span>WhatsApp</span></div>
+        <div class="links"><a href="https://daemon-018.blogspot.com" target="_blank" class="alt">in development</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" style="padding-top:0">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">04.</span>
+      <h2>skills &amp; stack</h2>
+      <span class="line"></span>
+    </div>
+    <div class="skill-cards">
+      <div class="skill-card"><div class="icon">🔴</div><h4>Red Teaming</h4><p>Penetration testing, WiFi auditing, recon methodology, attack chains — practiced and documented on my own hardware.</p></div>
+      <div class="skill-card"><div class="icon">🔵</div><h4>Blue Teaming</h4><p>Defensive hardening, analysis, monitoring, incident mindset — both sides of the kill chain.</p></div>
+      <div class="skill-card"><div class="icon">🐍</div><h4>Python</h4><p>Automation, security tooling, AI agents, data processing. 40+ packages in my Termux arsenal.</p></div>
+      <div class="skill-card"><div class="icon">📱</div><h4>Android / Termux</h4><p>Full dev environment on Android — package management, binary porting, APK reversing, smali patching, Kotlin app builds.</p></div>
+      <div class="skill-card"><div class="icon">🤖</div><h4>AI Engineering</h4><p>Autonomous agents (Hermes), AI assistants (PWA), automation pipelines, LLM integration.</p></div>
+      <div class="skill-card"><div class="icon">🌐</div><h4>Web Dev</h4><p>Static sites, PWAs, Hugo blogs, responsive frontends — deployed to GitHub Pages &amp; Blogger.</p></div>
+      <div class="skill-card"><div class="icon">📡</div><h4>Defence Tech</h4><p>Signal absorption research (X-band radar), MSME defence projects, hardware-software integration.</p></div>
+      <div class="skill-card"><div class="icon">🎬</div><h4>Content Creation</h4><p>Cybersecurity Shorts scripts in Telugu + English — hook, demo, CTA format built for retention.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="blog" style="padding-top:0">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">05.</span>
+      <h2>latest from the blog</h2>
+      <span class="line"></span>
+    </div>
+    <a class="blog-card" href="https://daemon-018.blogspot.com" target="_blank">
+      <span class="date">2026-07-15</span>
+      <div>
+        <h3>Top 5 AI Security Threats in 2026 (And How to Protect Yourself)</h3>
+        <p>Breaking down the AI attack surface of 2026 — AI-generated phishing, OTP scams, Android malware — and what you can do about it. → daemon-018.blogspot.com</p>
+      </div>
+    </a>
+    <div style="margin-top:18px">
+      <a class="btn btn-ghost" href="https://daemon-018.blogspot.com" target="_blank">read all posts →</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="padding-top:0">
+  <div class="container">
+    <div class="section-head">
+      <span class="num">06.</span>
+      <h2>get in touch</h2>
+      <span class="line"></span>
+    </div>
+    <div class="contact-grid">
+      <a class="contact-card" href="https://github.com/Daemon-018" target="_blank">
+        <span class="ico">🐙</span>
+        <div><div class="lbl">github</div><div class="val">@Daemon-018</div></div>
+      </a>
+      <a class="contact-card" href="https://daemon-018.blogspot.com" target="_blank">
+        <span class="ico">📝</span>
+        <div><div class="lbl">blog</div><div class="val">daemon-018.blogspot.com</div></div>
+      </a>
+      <a class="contact-card" href="mailto:daemon018@users.noreply.github.com">
+        <span class="ico">✉️</span>
+        <div><div class="lbl">email</div><div class="val">GitHub-linked email</div></div>
+      </a>
+      <a class="contact-card" href="https://github.com/Daemon-018/Daemon-018.github.io" target="_blank">
+        <span class="ico">🔭</span>
+        <div><div class="lbl">security blog repo</div><div class="val">SecHunter blog</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>Daemon-018 // Gedela Hemanth — built with <span class="heart">♥</span> in Termux · <span class="mono">@Daemon-018</span></p>
+  </div>
+</footer>
+
+<script>
+// close mobile nav on link click
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+  document.getElementById('navLinks').classList.remove('open');
+}));
+</script>
+
+</body>
+</html>
